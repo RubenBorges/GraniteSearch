@@ -14,8 +14,8 @@ TO BUILD:
 4) The program, model and anything else required should already have been installed in the project directory "dist/"
 -----------------------------------------
 
-TO USE:
+USAGE:
 
-      Usage:   ./dist/GraniteSearch
+Enter command from project root directory: ./dist/GraniteSearch
 
 
