@@ -5,7 +5,6 @@ project(GraniteSearch CXX)
 set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Process the source subdirectory first
 add_subdirectory(src)
 
 # =====================================================================
@@ -14,20 +13,19 @@ add_subdirectory(src)
 
 set(DIST_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dist")
 
-# 1. Install the compiled binary executable
 install(TARGETS GraniteSearch
     RUNTIME DESTINATION "${DIST_DIR}"
 )
 
-# 2. Copy the text documentation assets folder contents
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/docs/"
     DESTINATION "${DIST_DIR}/docs"
     FILES_MATCHING PATTERN "*.txt"
 )
 
-# 3. New Rule: Copy the ibm-granite30m folder layout into dist/
-# Note: Leaving off the trailing slash on "ibm-granite30m" ensures
-# that the folder itself is created as dist/ibm-granite30m/
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/ibm-granite30m"
     DESTINATION "${DIST_DIR}"
+)
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/images/"
+    DESTINATION "${DIST_DIR}"
+    FILES_MATCHING PATTERN "*.png"
 )

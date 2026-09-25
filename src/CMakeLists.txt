@@ -1,13 +1,18 @@
 # Source and header setups
 set(SOURCES
-    GraniteSearch.cpp
+    granitesearch.cpp
     graniteembedder.cpp
 )
 set(HEADERPATHS
     include/graniteembedder.hpp
+    include/granitesearch.hpp
 )
 
-add_executable(GraniteSearch ${SOURCES} ${HEADERPATHS})
+add_library(GraniteSearchCore STATIC ${SOURCES} ${HEADERPATHS})
+add_executable(GraniteSearch GraniteUI.cpp)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(RAYLIB REQUIRED IMPORTED_TARGET raylib)
 
 # =====================================================================
 # SYSTEM PACMAN LLAMA LINKING RULES (Arch Linux)
@@ -22,17 +27,20 @@ find_library(LLAMA_LIB
 )
 
 # 2. Add search parameters for your local project headers and system-wide headers
-target_include_directories(GraniteSearch PRIVATE
+target_include_directories(GraniteSearchCore PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     /usr/include
 )
 
 # 3. Explicitly link everything, clean and warning-free
-target_link_libraries(GraniteSearch PRIVATE
+target_link_libraries(GraniteSearchCore PUBLIC
     ${LLAMA_LIB}   # Resolves to /usr/lib/libllama.so exactly
     pthread        # POSIX threads
     dl             # Dynamic linking loader
 )
 
+target_link_libraries(GraniteSearch PRIVATE GraniteSearchCore PkgConfig::RAYLIB)
+
 # 4. Compiler optimizations
+target_compile_options(GraniteSearchCore PRIVATE -O3 -Wall -Wextra -march=native)
 target_compile_options(GraniteSearch PRIVATE -O3 -Wall -Wextra -march=native)
