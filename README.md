@@ -1,3 +1,5 @@
+<img width="1280" height="841" alt="image" src="https://github.com/user-attachments/assets/a1907c63-3f12-40b0-8504-2d12841584c9" />
+
 TO BUILD:
 
 1) First, unzip the .tar file inside the directory: "ibm-granite30m"
@@ -14,7 +16,6 @@ TO BUILD:
 
 TO USE:
 
-      Usage:   ./dist/GraniteSearch [path_to_gguf_model] "[query]" [file1.txt] [file2.txt] ...
-      Example: ./dist/GraniteSearch ./dist/ibm-granite30m/ibm-granite "Linda dog" dist/docs/linda_the_dog.txt
+      Usage:   ./dist/GraniteSearch
 
 
